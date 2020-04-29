@@ -1,0 +1,50 @@
+.navbar-brand {
+  font-weight: 700;
+}
+
+.nav-item .nav-link {
+  font-weight: 500;
+}
+
+.search-form .input-group {
+  background-color: #f3f4f7;
+  padding: 0 5px;
+  border-radius: 4px;
+}
+
+.search-form .input-group:focus-within {
+  background-color: #ffffff;
+}
+.search-form i {
+  font-size: 24px;
+  color: #adb5bd;
+  height: 20px;
+  width: 20px;
+  transition: color ease-in 300ms;
+}
+.search-form .input-group:focus-within i {
+  color: black;
+  transition: color ease-in 300ms;
+}
+.search-form input {
+  background-color: transparent;
+  border: 0;
+  height: 38px;
+  font-size: 1rem;
+}
+.search-form input::placeholder {
+  font-size: 14px;
+  opacity: 1;
+  transition: opacity linear 300ms;
+}
+
+.search-form input:focus::placeholder {
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity linear 300ms;
+}
+
+.search-form input:focus,
+.search-form input:active {
+  outline: none;
+}

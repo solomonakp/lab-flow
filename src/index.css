@@ -1,3 +1,29 @@
+/* @font-face {
+  font-family: 'Roboto';
+  src: url('./assets/font/Roboto-Light.ttf') format('truetype');
+  font-weight: 300;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('./assets/font/Roboto-Thin.ttf') format('truetype');
+  font-weight: 100;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('./assets/font/Roboto-Regular.ttf') format('truetype');
+  font-style: 400;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('./assets/font/Roboto-Medium.ttf') format('truetype');
+  font-style: 500;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('./assets/font/Roboto-Bold.ttf') format('truetype');
+  font-weight: 700;
+} */
+
 *,
 ::after,
 ::before {
@@ -14,9 +40,7 @@ html {
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Roboto';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
