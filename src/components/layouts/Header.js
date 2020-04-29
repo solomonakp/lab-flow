@@ -18,7 +18,7 @@ function Header() {
         <span className='navbar-toggler-icon' />
       </button>
 
-      <form className='form-inline search-form  ml-auto mr-4 '>
+      <form className='form-inline search-form  ml-auto mr-4 d-none d-sm-flex '>
         <div className='input-group align-items-center '>
           <i className='material-icons mr-2'>search</i>
           <input

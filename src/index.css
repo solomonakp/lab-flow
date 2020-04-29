@@ -1,4 +1,4 @@
-/* @font-face {
+@font-face {
   font-family: 'Roboto';
   src: url('./assets/font/Roboto-Light.ttf') format('truetype');
   font-weight: 300;
@@ -22,7 +22,7 @@
   font-family: 'Roboto';
   src: url('./assets/font/Roboto-Bold.ttf') format('truetype');
   font-weight: 700;
-} */
+}
 
 *,
 ::after,
