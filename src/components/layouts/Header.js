@@ -2,11 +2,11 @@ import React from 'react';
 import '../component styles/header.css';
 function Header() {
   return (
-    <nav className='navbar navbar-expand-lg navbar-light bg-light py-3 fixed-top'>
+    <nav className='navbar navbar-expand-lg navbar-light py-3 '>
       <a className='navbar-brand d-none d-lg-block' href='./'>
         LAB FLOW
       </a>
-      <button
+      {/* <button
         className='navbar-toggler'
         type='button'
         data-toggle='collapse'
@@ -16,11 +16,11 @@ function Header() {
         aria-label='Toggle navigation'
       >
         <span className='navbar-toggler-icon' />
-      </button>
+      </button> */}
 
       <form className='form-inline search-form  ml-auto mr-4 d-none d-sm-flex '>
         <div className='input-group align-items-center '>
-          <i className='material-icons mr-2'>search</i>
+          <i className='material-icons mr-2 '>search</i>
           <input
             type='search'
             placeholder='Search...'

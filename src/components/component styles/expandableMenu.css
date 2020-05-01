@@ -1,0 +1,42 @@
+button.expandable-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 12px 30px;
+  color: #4b4b5a;
+  font-size: 15px;
+  border: 0;
+  transition: all linear 300ms;
+  font-weight: 300;
+  background-color: transparent;
+  position: relative;
+  white-space: nowrap;
+}
+button.expandable-btn::before {
+  display: block;
+  content: '';
+  background-color: #5369f8;
+  position: absolute;
+  left: 0;
+  width: 0px;
+  top: 0;
+  bottom: 0;
+  transition: width linear 300ms;
+}
+
+button:hover,
+button:active,
+button:focus {
+  color: #5369f8;
+  background-color: #f7f7ff;
+  transition: all linear 300ms;
+  outline: none;
+}
+
+button.expandable-btn:active::before,
+button.expandable-btn:focus::before {
+  width: 3px;
+}
+
+/* button.expandable-btn i {
+  font-size: 20px; */
