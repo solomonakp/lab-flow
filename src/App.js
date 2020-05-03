@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+// simplebar
+import 'simplebar/dist/simplebar.min.css';
 import './App.css';
 
 // components
@@ -7,7 +9,7 @@ import Header from './components/layouts/Header';
 import Sidebar from './components/layouts/Sidebar';
 
 function App() {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
   return (
     <div className='App'>
       <Header />

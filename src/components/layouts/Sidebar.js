@@ -1,275 +1,139 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 
-import { Drawer, DrawerHeader, DrawerContent } from '@rmwc/drawer';
-import { MenuSurfaceAnchor, MenuSurface } from '@rmwc/menu';
-import { IconButton } from '@rmwc/icon-button';
+import DropDown from './DropDown';
+
+import SimpleBar from 'simplebar-react';
+
 import {
-  List,
-  CollapsibleList,
-  SimpleListItem,
-  ListGroup,
-  ListGroupSubheader,
   ListItem,
-  ListItemMeta,
-  ListItemGraphic,
-  ListDivider,
-} from '@rmwc/list';
-//styles
-// drawer
-import '@material/drawer/dist/mdc.drawer.css';
-// list component
+  ListGroup,
+  Collapsibles,
+  CollapsibleList,
+  ListHeader,
+} from './ExpandableMenu';
 
-// menu components
-import '@material/menu/dist/mdc.menu.css';
-import '@material/menu-surface/dist/mdc.menu-surface.css';
-import '@material/list/dist/mdc.list.css';
-import '@rmwc/list/collapsible-list.css';
-import '@material/icon-button/dist/mdc.icon-button.css';
-import '@rmwc/icon/icon.css';
-import '@material/ripple/dist/mdc.ripple.css';
 import '../component styles/sidebar.css';
 
-function Sidebar({ toggle }) {
-  const [open, setOpen] = React.useState(false);
-  return (
-    <Drawer dismissible open={toggle}>
-      <DrawerHeader>
-        <div className='profile mb-2 mt-2'>
-          <div className='details'>
-            <div className='name'>Sunny Asar</div>
-            <div className='privilege'>ADMINISTRATOR</div>
+class Sidebar extends Component {
+  constructor(props) {
+    super(props);
+    this.aside = React.createRef();
+    this.state = {};
+  }
+
+  componentDidUpdate(prevProps) {
+    const aside = this.aside.current;
+    if (this.state !== prevProps) {
+      aside.classList.toggle('open');
+    }
+  }
+
+  render() {
+    return (
+      <aside ref={this.aside} className='open'>
+        <nav className='sidebar'>
+          <div className='nav-header'>
+            <div className='profile mb-2 mt-2'>
+              <div className='details'>
+                <div className='name'>Sunny Asar</div>
+                <div className='privilege'>ADMINISTRATOR</div>
+              </div>
+              <DropDown />
+            </div>
           </div>
-          <MenuSurfaceAnchor>
-            <MenuSurfaceAnchor>
-              <MenuSurface
-                anchorCorner={'bottomLeft'}
-                open={open}
-                onClose={(evt) => setOpen(false)}
-              >
-                <List>
-                  <ListGroup>
-                    <ListItem>
-                      <ListItemGraphic
-                        icon='person'
-                        className='material-icons-outlined'
-                      />
-                      My Account
-                    </ListItem>
-                    <ListItem>
-                      <ListItemGraphic
-                        icon='settings'
-                        className='material-icons-outlined'
-                      />
-                      Settings
-                    </ListItem>
-                    <ListItem>
-                      <ListItemGraphic
-                        icon='lock'
-                        className='material-icons-outlined'
-                      />
-                      Lock Screen
-                    </ListItem>
-                    <ListItem>
-                      <ListItemGraphic
-                        icon='help_outline'
-                        className='material-icons-outlined'
-                      />
-                      Support
-                    </ListItem>
-                  </ListGroup>
-                  <ListDivider />
-                </List>
-                <ListGroup>
-                  <ListItem>
-                    <ListItemGraphic
-                      icon='exit_to_app'
-                      className='material-icons-outlined'
-                    />
-                    Logout
-                  </ListItem>
-                </ListGroup>
-              </MenuSurface>
-              {/** The handle can be any component you want */}
-              <IconButton
-                icon='expand_more'
-                onClick={(evt) => setOpen(!open)}
+          <SimpleBar className='nav-content'>
+            {/* <div className='nav-content'> */}
+            <ListGroup headName='Navigation'>
+              <ListItem
+                metaTag={
+                  <span className='div ml-auto badge-success badge'>1</span>
+                }
+                iconName='home'
+                text='Dashboard'
               />
-            </MenuSurfaceAnchor>
-          </MenuSurfaceAnchor>
-        </div>
-      </DrawerHeader>
-      <DrawerContent>
-        <List>
-          <ListGroup>
-            <ListGroupSubheader>NAVIGATION</ListGroupSubheader>
-            <ListItem className='single'>
-              <ListItemGraphic
-                icon='home'
-                className='material-icons-outlined'
-                // style={{ fontSize: '32px' }}
+            </ListGroup>
+            <Collapsibles>
+              <ListHeader headName='Apps' />
+              <ListItem iconName='insert_invitation' text='Calendar' />
+              <CollapsibleList
+                iconName={'email'}
+                name='Emails'
+                collapseItems={['Inbox', 'Read', 'Compose']}
               />
-              Dashboard <div className='div ml-auto badge-success badge'>1</div>
-            </ListItem>
-          </ListGroup>
-          <ListGroup>
-            <ListGroupSubheader>APPS</ListGroupSubheader>
-            <ListItem className='single'>
-              <ListItemGraphic
-                icon='insert_invitation'
-                className='material-icons-outlined'
+              <CollapsibleList
+                iconName={'business_center'}
+                name='Projects'
+                collapseItems={['List', 'Details']}
               />
-              Calendar
-            </ListItem>
-            <CollapsibleList
-              handle={
-                <ListItem>
-                  <ListItemGraphic
-                    icon='inbox'
-                    className='material-icons-outlined'
-                  />
-                  Email <ListItemMeta icon='navigate_next'></ListItemMeta>
-                </ListItem>
-              }
-            >
-              <SimpleListItem text='Inbox' />
-              <SimpleListItem text='Read' />
-              <SimpleListItem text='Compose' />
-            </CollapsibleList>
-            <CollapsibleList
-              handle={
-                <ListItem>
-                  <ListItemGraphic
-                    icon='business_center'
-                    className='material-icons-outlined'
-                  />
-                  Projects <ListItemMeta icon='navigate_next'></ListItemMeta>
-                </ListItem>
-              }
-            >
-              <SimpleListItem text='List' />
-              <SimpleListItem text='Details' />
-            </CollapsibleList>
-            <CollapsibleList
-              handle={
-                <ListItem>
-                  <ListItemGraphic
-                    icon='bookmark_border'
-                    className='material-icons-outlined'
-                  />
-                  Tasks <ListItemMeta icon='navigate_next'></ListItemMeta>
-                </ListItem>
-              }
-            >
-              <SimpleListItem text='List' />
-              <SimpleListItem text='Kanban Board' />
-            </CollapsibleList>
-          </ListGroup>
-          <ListGroup>
-            <ListGroupSubheader>CUSTOM</ListGroupSubheader>
-            <CollapsibleList
-              handle={
-                <ListItem>
-                  <ListItemGraphic
-                    icon='description'
-                    className='material-icons-outlined'
-                  />
-                  Pages <ListItemMeta icon='navigate_next'></ListItemMeta>
-                </ListItem>
-              }
-            >
-              <SimpleListItem text='Starter' />
-              <SimpleListItem text='Profile' />
-              <SimpleListItem text='Activity' />
-              <SimpleListItem text='Invoice' />
-              <SimpleListItem text='Pricing' />
-              <SimpleListItem text='Maintenance' />
-              <SimpleListItem text='Login' />
-              <SimpleListItem text='Register' />
-              <SimpleListItem text='Recover Password' />
-              <SimpleListItem text='Confirm' />
-              <SimpleListItem text='Error 404' />
-            </CollapsibleList>
-            <CollapsibleList
-              handle={
-                <ListItem>
-                  <ListItemGraphic
-                    icon='web'
-                    className='material-icons-outlined'
-                  />
-                  Layouts <ListItemMeta icon='navigate_next'></ListItemMeta>
-                </ListItem>
-              }
-            >
-              <SimpleListItem text='Horizontal Nav' />
-              <SimpleListItem text='RTL' />
-              <SimpleListItem text='Dark' />
-              <SimpleListItem text='Scrollable' />
-              <SimpleListItem text='Boxed' />
-              <SimpleListItem text='With Pre-loader' />
-              <SimpleListItem text='Dark Side Nav' />
-            </CollapsibleList>
-          </ListGroup>
-          <ListGroup>
-            <ListGroupSubheader>COMPONENTS</ListGroupSubheader>
-            <CollapsibleList
-              handle={
-                <ListItem>
-                  <ListItemGraphic
-                    icon='widgets'
-                    className='material-icons-outlined'
-                  />
-                  UI Elements <ListItemMeta icon='navigate_next'></ListItemMeta>
-                </ListItem>
-              }
-            >
-              <SimpleListItem text='UI Elements' />
-              <SimpleListItem text='Bootstrap UI' />
-              <SimpleListItem text='Widgets' />
-            </CollapsibleList>
-            <CollapsibleList
-              handle={
-                <ListItem>
-                  <ListItemGraphic
-                    icon='description'
-                    className='material-icons-outlined'
-                  />
-                  Forms<ListItemMeta icon='navigate_next'></ListItemMeta>
-                </ListItem>
-              }
-            >
-              <SimpleListItem text='Basic Elements' />
-              <SimpleListItem text='Advanced' />
-              <SimpleListItem text='Validation' />
-              <SimpleListItem text='Wizard' />
-              <SimpleListItem text='Editor' />
-              <SimpleListItem text='File Uploads' />
-            </CollapsibleList>
-            <ListItem className='single'>
-              <ListItemGraphic
-                icon='pie_chart'
-                className='material-icons-outlined'
+              <CollapsibleList
+                iconName={'bookmark_border'}
+                name='Tasks'
+                collapseItems={['List', 'Kanban Board']}
               />
-              Charts
-            </ListItem>
-            <CollapsibleList
-              handle={
-                <ListItem>
-                  <ListItemGraphic
-                    icon='table_chart'
-                    className='material-icons-outlined'
-                  />
-                  Tables <ListItemMeta icon='navigate_next'></ListItemMeta>
-                </ListItem>
-              }
-            >
-              <SimpleListItem text='Basic' />
-              <SimpleListItem text='Advanced' />
-            </CollapsibleList>
-          </ListGroup>
-        </List>
-      </DrawerContent>
-    </Drawer>
-  );
+              <ListHeader headName='Custom' />
+              <CollapsibleList
+                iconName={'description'}
+                name='Pages'
+                collapseItems={[
+                  'Starter',
+                  'Profile',
+                  'Activity',
+                  'Invoice',
+                  'Pricing',
+                  'Maintenance',
+                  'Login',
+                  'Register',
+                  'Recover Password',
+                  'Confirm',
+                  'Error 404',
+                ]}
+              />
+              <CollapsibleList
+                iconName={'web'}
+                name='Layouts'
+                collapseItems={[
+                  'Horizontal Nav',
+                  'RTL',
+                  'Dark',
+                  'Scrollable',
+                  'Boxed',
+                  'With Pre-loader',
+                  'Dark Side Nav',
+                ]}
+              />
+              <ListHeader headName='COMPONENTS' />
+              <CollapsibleList
+                iconName={'widgets'}
+                name='UI Elements'
+                collapseItems={['UI Elements', 'Bootstrap UI', 'Widgets']}
+              />
+
+              <CollapsibleList
+                iconName={'description'}
+                name='Forms'
+                collapseItems={[
+                  'Basic Elements',
+                  'Advanced',
+                  'Validation',
+                  'Wizard',
+                  'Editor',
+                  'File Uploads',
+                ]}
+              />
+              <ListItem iconName='pie_chart' text='Charts' />
+
+              <CollapsibleList
+                iconName={'table_chart'}
+                name='Tables'
+                collapseItems={['Basic', 'Advanced']}
+              />
+            </Collapsibles>
+            {/* </div> */}
+          </SimpleBar>
+        </nav>
+      </aside>
+    );
+  }
 }
 
 export default Sidebar;

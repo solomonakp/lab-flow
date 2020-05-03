@@ -1,45 +1,71 @@
 import React from 'react';
 import '../component styles/expandableMenu.css';
-export function Item({ metaTag, className, iconName, text }) {
+import { camelCase } from 'lodash';
+
+export function ListItem({ metaTag, iconName, text }) {
   return (
-    <button class='expandable-btn '>
-      <i className={`${className} material-icons material-icons-outlined mr-2`}>
-        {iconName}
-      </i>
-      {text}
-      {metaTag}
-    </button>
+    <li>
+      <a className='expandable-btn ' href='/'>
+        <i className={`material-icons-outlined mr-2 item-icon`}>{iconName}</i>
+        {text}
+        {metaTag}
+      </a>
+    </li>
   );
 }
 
-function ExpandableMenu({ iconName, text, listItems }) {
+export function Collapsibles({ children }) {
   return (
-    <div className='expandible'>
+    <ul className='list-group accordion' id='collapsibles'>
+      {children}
+    </ul>
+  );
+}
+
+export function CollapsibleList({ iconName, name, collapseItems }) {
+  return (
+    <li className='collapsible-list'>
       <button
-        class='expandable-btn '
+        className='expandable-btn'
         type='button'
         data-toggle='collapse'
-        data-target={`#${text}`}
+        data-target={`#${camelCase(name)}`}
         aria-expanded='false'
-        aria-controls={text}
+        aria-controls={camelCase(name)}
+        id={`${camelCase(name)}-collapse`}
       >
-        <i className={` material-icons material-icons-outlined mr-2`}>
-          {iconName}
-        </i>
-        {text}
-        <i className={`material-icons material-icons-outlined ml-auto `}>
+        <i className={`material-icons-outlined mr-2 item-icon`}>{iconName}</i>
+        {name}
+        <i className={`material-icons-outlined ml-auto meta-tag`}>
           navigate_next
         </i>
       </button>
-      <div class='collapse multi-collapse' id={text}>
-        {listItems.map((item) => (
-          <a className={'expandable-item'} href='/'>
-            {item}
-          </a>
-        ))}
+      <div
+        id={camelCase(name)}
+        className='collapse'
+        aria-labelledby={`${camelCase(name)}-collapse`}
+        data-parent='#collapsibles'
+      >
+        <div className='link-box'>
+          {collapseItems.map((item, index) => (
+            <a href='/' className='link-item' key={index}>
+              {item}
+            </a>
+          ))}
+        </div>
       </div>
-    </div>
+    </li>
   );
 }
+export function ListHeader({ headName }) {
+  return <li className='list-header'>{headName}</li>;
+}
 
-export default ExpandableMenu;
+export function ListGroup({ headName, children }) {
+  return (
+    <ul className='list-group'>
+      <ListHeader headName={headName} />
+      {children}
+    </ul>
+  );
+}
