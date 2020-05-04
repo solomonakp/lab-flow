@@ -101,6 +101,71 @@ code {
 #root {
   height: 100%;
 }
+nav.navbar {
+  background-color: #fff;
+  font-family: 'Nunito Sans';
+}
+.navbar-brand {
+  font-weight: 700;
+}
+button.navbar-toggler {
+  border: 0;
+}
+.nav-item .nav-link {
+  font-weight: 300;
+}
+
+.search-form .input-group {
+  background-color: #f3f4f7;
+  padding: 0 5px;
+  border-radius: 4px;
+}
+
+.search-form .input-group:focus-within {
+  background-color: #ffffff;
+}
+.search-form i {
+  font-size: 24px;
+  color: #adb5bd;
+  height: 20px;
+  width: 20px;
+  transition: all ease-in 300ms;
+  transform: rotate(0deg);
+}
+.search-form .input-group:focus-within i {
+  color: black;
+  transform: rotate(90deg);
+  transition: all ease-in 300ms;
+}
+.search-form input {
+  background-color: transparent;
+  border: 0;
+  height: 38px;
+  font-size: 1rem;
+}
+.search-form input::placeholder {
+  font-size: 14px;
+  opacity: 1;
+  transition: opacity linear 300ms;
+  font-weight: 300;
+}
+
+.search-form input:focus::placeholder {
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity linear 300ms;
+}
+
+.search-form input:focus,
+.search-form input:active {
+  outline: none;
+}
+
+@media (max-width: 991px) {
+  nav.navbar {
+    justify-content: flex-end;
+  }
+}
 
 section.main-section {
   padding: 0;
